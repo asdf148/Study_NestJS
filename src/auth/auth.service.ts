@@ -10,10 +10,11 @@ export class AuthService {
         private usersRepository: Repository<User>,
     ){}
 
-    async create(user:User){
+    async create(user:User):Promise<string> {
         console.log(user);//다 나옴
         const newUser = this.usersRepository.create(user);
         console.log(newUser);
         await this.usersRepository.save(user);
+        return "saved";
     }
 }
