@@ -1,6 +1,6 @@
 
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Post } from './post.entity';
+import { EPost } from './post.entity';
 
 @Entity()
 export class User {
@@ -17,10 +17,10 @@ export class User {
   password: string;
 
   @OneToMany(
-      () => Post,
+      () => EPost,
       (post) => post.user
   )
-  posts:Post[];
+  posts:EPost[];
 
   @CreateDateColumn()
   createdAt: Date;

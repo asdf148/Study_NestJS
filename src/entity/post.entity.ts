@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, Up
 import { User } from './user.entity';
 
 @Entity()
-export class Post {
+export class EPost {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -11,9 +11,6 @@ export class Post {
 
   @Column()
   content: string;
-
-  @Column({ default: true })
-  isActive: boolean;
 
   @ManyToOne(
       () => User,

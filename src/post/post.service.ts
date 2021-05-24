@@ -1,31 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Post } from 'src/entity/post.entity';
+import { EPost } from 'src/entity/post.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class PostService {
     constructor(
-        @InjectRepository(Post)
-        private postsRepository: Repository<Post>,
+        @InjectRepository(EPost)
+        private postsRepository: Repository<EPost>,
     ){}
 
-    async create(post:Post){
+    async create(post:EPost):Promise<string>{
         await this.postsRepository.save(post);
         return "saved";
     }
 
-    async findAll(): Promise<Post[]>{
+    async findAll(): Promise<EPost[]> {
         const posts = await this.postsRepository.find();
         return posts;
     }
 
-    async findOne(id:number):Promise<Post>{
+    async findOne(id:number):Promise<EPost> {
         const post = await this.postsRepository.findOne(id);
         return post;
     }
 
-    async update(post:Post){
-        // const updatedPost = await this.postsRepository.update(post);
+    async update(id:number, post:EPost):Promise<string> {
+        const updatedPost = await this.postsRepository.findOne(id);
+        updatedPost.content = post.content;
+        updatedPost.title = post.title;
+        await this.postsRepository.save(updatedPost);
+        return "updated";
+    }
+
+    async delete(id:number):Promise<string> {
+        await this.postsRepository.delete(id);
+        return "deleted";
     }
 }
