@@ -17,4 +17,23 @@ export class AuthService {
         await this.usersRepository.save(user);
         return "saved";
     }
+
+    async findAll():Promise<User[]>{
+        try{
+            return await this.usersRepository.find();
+        }catch(e){
+            console.log(e);
+        }
+    }
+
+    async delete(id:number){
+        try{
+            await this.usersRepository.delete(id);
+            return "deleted"
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    
 }
