@@ -6,27 +6,27 @@ import { PostService } from './post.service';
 export class PostController {
     constructor(private readonly postService: PostService) {}
 
-    @Get()
+    @Get('posts')
     async findAll(){
         return await this.postService.findAll();
     }
 
-    @Get()
+    @Get('post/:id')
     async findOne(@Param('id') id:number){
         return await this.postService.findOne(id);
     }
 
-    @Post()
+    @Post('write')
     async create(@Body() post:EPost){
         return await this.postService.create(post);
     }
 
-    @Put()
+    @Put('update/:id')
     async update(@Param('id') id:number, @Body() post:EPost){
         return await this.postService.update(id, post);
     }
 
-    @Delete()
+    @Delete('delete/:id')
     async delete(@Param('id') id:number){
         return await this.postService.delete(id);
     }
