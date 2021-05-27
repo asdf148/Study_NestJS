@@ -22,7 +22,19 @@ export class AuthService {
         try{
             return await this.usersRepository.find();
         }catch(e){
-            console.log(e);
+            console.error(e);
+        }
+    }
+
+    async modify(id:number, user:User):Promise<string>{
+        try{
+            const dbUser = await this.usersRepository.findOne(id);
+            dbUser.nick = user.nick;
+            dbUser.password = user.password;
+            await this.usersRepository.save(dbUser);
+            return "user upd(ated";
+        }catch(e){
+            console.error(e);
         }
     }
 
@@ -34,6 +46,4 @@ export class AuthService {
             console.error(e);
         }
     }
-
-    
 }
