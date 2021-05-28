@@ -26,13 +26,21 @@ export class AuthService {
         }
     }
 
+    async findOne(id:number):Promise<User>{
+        try{
+            return this.usersRepository.findOne(id);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
     async modify(id:number, user:User):Promise<string>{
         try{
-            const dbUser = await this.usersRepository.findOne(id);
+            const dbUser = await this.findOne(id);
             dbUser.nick = user.nick;
             dbUser.password = user.password;
             await this.usersRepository.save(dbUser);
-            return "user upd(ated";
+            return "user updated";
         }catch(e){
             console.error(e);
         }
