@@ -16,6 +16,11 @@ export class AuthController {
         return this.authService.findAll();
     }
 
+    @Get('user/:id')
+    findOne(@Param('id') id:number):Promise<User>{
+        return this.authService.findOne(id);
+    }
+
     @Put('modify/:id')
     modify(@Param('id') id:number, @Body() user:User):Promise<string>{
         return this.authService.modify(id, user);
