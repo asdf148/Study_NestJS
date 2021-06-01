@@ -28,7 +28,7 @@ export class AuthService {
 
     async findOne(id:number):Promise<User>{
         try{
-            return this.usersRepository.findOne(id);
+            return await this.usersRepository.findOne(id);
         }catch(e){
             console.error(e);
         }
