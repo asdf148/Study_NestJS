@@ -16,9 +16,9 @@ export class PostController {
         return this.postService.findOne(id);
     }
 
-    @Post('write')
-    create(@Body() post:EPost):Promise<string>{
-        return this.postService.create(post);
+    @Post('write/:id')
+    create(@Param('id') id:number, @Body() post:EPost):Promise<string>{
+        return this.postService.create(id, post);
     }
 
     @Put('update/:id')

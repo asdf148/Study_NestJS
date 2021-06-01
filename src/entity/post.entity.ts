@@ -17,6 +17,7 @@ export class EPost {
   @Column()
   content: string;
 
+  @IsOptional()
   @IsNumber()
   @ManyToOne(
       () => User,
