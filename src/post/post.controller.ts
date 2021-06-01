@@ -7,27 +7,27 @@ export class PostController {
     constructor(private readonly postService: PostService) {}
 
     @Get('posts')
-    async findAll(){
-        return await this.postService.findAll();
+    findAll():Promise<EPost[]>{
+        return this.postService.findAll();
     }
 
     @Get('post/:id')
-    async findOne(@Param('id') id:number){
-        return await this.postService.findOne(id);
+    findOne(@Param('id') id:number):Promise<EPost>{
+        return this.postService.findOne(id);
     }
 
     @Post('write')
-    async create(@Body() post:EPost){
-        return await this.postService.create(post);
+    create(@Body() post:EPost):Promise<string>{
+        return this.postService.create(post);
     }
 
     @Put('update/:id')
-    async update(@Param('id') id:number, @Body() post:EPost){
-        return await this.postService.update(id, post);
+    update(@Param('id') id:number, @Body() post:EPost):Promise<string>{
+        return this.postService.update(id, post);
     }
 
     @Delete('delete/:id')
-    async delete(@Param('id') id:number){
-        return await this.postService.delete(id);
+    delete(@Param('id') id:number):Promise<string>{
+        return this.postService.delete(id);
     }
 }
